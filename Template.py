@@ -18,7 +18,7 @@ class Arrow:
         self.body.apply_impulse_at_world_point(impulse, self.body.position)
 
 def powerbar(ticks):
-    current_time = pygame.time.get_ticks()
+    current_time = ticks
     diff = current_time - start_time
     power = min(diff, 1000)
     h = power / 2
@@ -67,7 +67,6 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            sys.exit()
         
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 start_time = pygame.time.get_ticks()
