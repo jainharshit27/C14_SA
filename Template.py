@@ -17,6 +17,19 @@ class Arrow:
         self.body.body_type = pymunk.Body.DYNAMIC
         self.body.apply_impulse_at_world_point(impulse, self.body.position)
 
+#Create class Target:
+    #Create special method __init__(self) and add the creation of target in it like following.
+        #vs = [(1, -80), (1, 80), (-1, 80), (-1, -80)]
+        #self.body = pymunk.Body(body_type=pymunk.Body.KINEMATIC)          #Add self to all values to indicate objects
+        #self.shape = pymunk.Poly(self.body, vs)
+        #self.body.position = 600,400
+        #space.add(self.body, self.shape)
+
+    #Create method draw(self, image) and move the code which adds ropes and target here.
+        #screen.blit(rope_img, (round(self.body.position.x-5), 0))
+        #screen.blit(rope_img, (round(self.body.position.x-20), 0))
+        #screen.blit(image, (round(self.body.position.x-15), round(self.body.position.y-80)))
+        
 def powerbar(ticks):
     current_time = ticks
     diff = current_time - start_time
@@ -46,15 +59,17 @@ bg = pygame.transform.scale(bg, (width, height))
 archer = pygame.image.load("bow.png")
 archer = pygame.transform.scale(archer, (100,150))
 
+#Remove Target creation from below and call Target class instead of this like target = Target()
 vs_rect = [(1, -80), (1, 80), (-1, 80), (-1, -80)]
 target_body = pymunk.Body(body_type=pymunk.Body.KINEMATIC)
 target_shape = pymunk.Poly(target_body, vs_rect)
 target_body.position = 600,400
+space.add(target_body, target_shape)     
+
 target_image = pygame.image.load("target.png")
 target_image = pygame.transform.scale(target_image, (25,160))
 rope_img = pygame.image.load("rope.png")
 rope_img = pygame.transform.scale(rope_img, (25,400))
-space.add(target_body, target_shape)     
     
 #Arrow
 arrow = Arrow(130,85)
@@ -82,6 +97,8 @@ while True:
         powerbar(pygame.time.get_ticks())
 
     space.debug_draw(draw_options)
+    
+    #call target.draw(target_image) here
     
     #space reload
     space.step(1/60)
